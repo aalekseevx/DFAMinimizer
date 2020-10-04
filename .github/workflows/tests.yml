@@ -1,0 +1,27 @@
+name: CI Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install
+        uses: abatilo/actions-poetry@v1.5.0
+        with:
+          python_version: 3.7.0
+          poetry_version: 1.0.5
+          args: install
+      - name: Run tests
+        uses: abatilo/actions-poetry@v1.5.0
+        with:
+          python_version: 3.7.0
+          poetry_version: 1.0.5
+          args: run task test
+      - name: Uploading coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
