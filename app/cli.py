@@ -7,6 +7,13 @@ from loguru import logger
 
 
 if __name__ == '__main__':
+    logger.remove()
+    my_format = ("<level>{level: <8}</level> |"
+                 "<cyan>{name}</cyan>:<cyan>{function}</cyan>:"
+                 "<cyan>{line}</cyan> - <level>{message}</level>")
+
+    logger.add(sys.stdout, colorize=True, format=my_format, level='DEBUG')
+
     try:
         input_file = open(sys.argv[1], 'r')
     except OSError:
@@ -31,4 +38,4 @@ if __name__ == '__main__':
         logger.exception("Can't open output json file")
         sys.exit(1)
 
-    json.dump(dfa, output_file, indent=4, cls=SimpleNamespaceEncoder)
+    json.dump(dfa, output_file, indent=4, cls=SimpleNamespaceEncoder, sort_keys=True)

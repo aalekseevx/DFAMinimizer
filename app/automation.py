@@ -2,6 +2,7 @@ from collections import deque
 from itertools import product
 from types import SimpleNamespace
 from typing import Dict, List
+from loguru import logger
 
 # Everything is actually a namespace,
 # Named for convenience and type checks
@@ -35,6 +36,7 @@ def add_fake_vertex(dfa: Automation) -> None:
                     dest=DEATH_STATE.name,
                     by=letter
                 ))
+                logger.debug(f"Add edge to fake vertex: {vars(dfa.transmissions[-1])}")
 
 
 def get_reversed_adjacency_list(dfa: Automation) -> Dict:
@@ -44,18 +46,19 @@ def get_reversed_adjacency_list(dfa: Automation) -> Dict:
     return result
 
 
-def dfs(dfa: Automation, state: str, reachable: List[str]) -> None:
-    if state in reachable:
-        return
-    reachable.append(state)
-    for edge in dfa.transmissions:
-        if edge.source == state:
-            dfs(dfa, edge.dest, reachable)
-
-
 def get_reachable_from_start(dfa: Automation) -> List[str]:
     reachable = []
-    dfs(dfa, dfa.start, reachable)
+
+    def dfs(state: str) -> None:
+        if state in reachable:
+            return
+        logger.debug(f"State {state} is reachable")
+        reachable.append(state)
+        for edge in dfa.transmissions:
+            if edge.source == state:
+                dfs(edge.dest)
+
+    dfs(dfa.start)
     return reachable
 
 
@@ -67,6 +70,7 @@ def build_table(dfa: Automation) -> Dict:
     for v1 in dfa.states:
         for v2 in dfa.states:
             if not nonequivalent[v1.name, v2.name] and v1.is_terminal != v2.is_terminal:
+                logger.debug(f"{v1.name, v2.name} nonequivalent by def.")
                 nonequivalent[v1.name, v2.name] = True
                 nonequivalent[v2.name, v1.name] = True
                 queue.append((v1.name, v2.name))
@@ -78,6 +82,7 @@ def build_table(dfa: Automation) -> Dict:
                 if before_v1.by != letter or before_v2.by != letter:
                     continue
                 if not nonequivalent[before_v1.source, before_v2.source]:
+                    logger.debug(f"{before_v1.source, before_v2.source} found to be nonequivalent recursively.")
                     nonequivalent[before_v1.source, before_v2.source] = True
                     nonequivalent[before_v2.source, before_v1.source] = True
                     queue.append((before_v1.source, before_v2.source))
@@ -85,6 +90,7 @@ def build_table(dfa: Automation) -> Dict:
 
 
 def minimize(dfa: Automation) -> Automation:
+    logger.info("Starting minimization")
     add_fake_vertex(dfa)
     reachable = get_reachable_from_start(dfa)
     nonequivalent = build_table(dfa)
@@ -94,6 +100,7 @@ def minimize(dfa: Automation) -> Automation:
     next_component = 0
     will_be_terminal = []
     if DEATH_STATE.name in reachable:
+        logger.info("Death state is reachable!")
         for state in dfa.states:
             if not nonequivalent[DEATH_STATE.name, state.name]:
                 component[state.name] = next_component
@@ -132,10 +139,12 @@ def minimize(dfa: Automation) -> Automation:
                 by=edge.by
             ))
 
+    logger.success("Minimization ended")
     return new_dfa
 
 
 def determinate(fa: Automation) -> Automation:
+    logger.info("Started determination")
     queue = deque()
     queue.append(frozenset({fa.start}))
     in_queue = set()
@@ -147,20 +156,26 @@ def determinate(fa: Automation) -> Automation:
     new_dfa.states = []
     new_dfa.transmissions = []
 
+    def get_name(state_set):
+        return "#".join(sorted(state_set)) if len(state_set) > 0 else 'null'
+
     while len(queue) > 0:
         state = queue.popleft()
         is_terminal = any([State(name=i, is_terminal=True) in fa.states for i in state])
-        cur_name = "#".join(sorted(state))
+        cur_name = get_name(state)
         new_dfa.states.append(State(
             name=cur_name,
             is_terminal=is_terminal
         ))
+
+        logger.debug(f"In the front of the queue: {cur_name}")
+
         for letter in fa.alphabet:
             new_set = set()
             for edge in fa.transmissions:
                 if edge.source in state and edge.by == letter:
                     new_set.add(edge.dest)
-            next_name = "#".join(sorted(new_set))
+            next_name = get_name(new_set)
             new_dfa.transmissions.append(Transmission(
                 source=cur_name,
                 dest=next_name,
@@ -169,4 +184,6 @@ def determinate(fa: Automation) -> Automation:
             if frozenset(new_set) not in in_queue:
                 queue.append(frozenset(new_set))
                 in_queue.add(frozenset(new_set))
+
+    logger.success("Determination ended")
     return new_dfa
