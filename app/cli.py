@@ -1,9 +1,34 @@
 import json
-from minimizer import minimize, determinater
 import sys
 
+from automation import Automation, minimize, determinate
+from helpers import SimpleNamespaceEncoder
+from loguru import logger
+
+
 if __name__ == '__main__':
-    with open(sys.argv[1], 'r') as f:
-        dfa = json.load(f)
-    with open(sys.argv[2], 'w') as f:
-        json.dump(minimize(determinater(dfa)), f, indent=4)
+    try:
+        input_file = open(sys.argv[1], 'r')
+    except OSError:
+        logger.exception("Can't open input json file")
+        sys.exit(1)
+
+    try:
+        fa = json.load(input_file, object_hook=lambda d: Automation(**d))
+    except json.JSONDecodeError:
+        logger.exception("Input json parsing error")
+        sys.exit(1)
+
+    try:
+        dfa = minimize(determinate(fa))
+    except Exception:
+        logger.exception("There was an error during automate processing")
+        sys.exit(1)
+
+    try:
+        output_file = open(sys.argv[2], 'w')
+    except OSError:
+        logger.exception("Can't open output json file")
+        sys.exit(1)
+
+    json.dump(dfa, output_file, indent=4, cls=SimpleNamespaceEncoder)

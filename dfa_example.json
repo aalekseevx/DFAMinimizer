@@ -36,83 +36,83 @@
 
   "transmissions": [
     {
-      "from": "A",
-      "to": "B",
+      "source": "A",
+      "dest": "B",
       "by": "1"
     },
     {
-      "from": "B",
-      "to": "A",
+      "source": "B",
+      "dest": "A",
       "by": "1"
     },
     {
-      "from": "A",
-      "to": "H",
+      "source": "A",
+      "dest": "H",
       "by": "0"
     },
     {
-      "from": "B",
-      "to": "H",
+      "source": "B",
+      "dest": "H",
       "by": "0"
     },
     {
-      "from": "H",
-      "to": "C",
+      "source": "H",
+      "dest": "C",
       "by": "0"
     },
     {
-      "from": "H",
-      "to": "C",
+      "source": "H",
+      "dest": "C",
       "by": "1"
     },
     {
-      "from": "C",
-      "to": "E",
+      "source": "C",
+      "dest": "E",
       "by": "0"
     },
     {
-      "from": "C",
-      "to": "F",
+      "source": "C",
+      "dest": "F",
       "by": "1"
     },
     {
-      "from": "F",
-      "to": "F",
+      "source": "F",
+      "dest": "F",
       "by": "0"
     },
     {
-      "from": "F",
-      "to": "F",
+      "source": "F",
+      "dest": "F",
       "by": "1"
     },
     {
-      "from": "E",
-      "to": "F",
+      "source": "E",
+      "dest": "F",
       "by": "0"
     },
     {
-      "from": "E",
-      "to": "G",
+      "source": "E",
+      "dest": "G",
       "by": "1"
     },
     {
-      "from": "D",
-      "to": "E",
+      "source": "D",
+      "dest": "E",
       "by": "0"
     },
     {
-      "from": "D",
-      "to": "F",
+      "source": "D",
+      "dest": "F",
       "by": "1"
     },
     {
-      "from": "G",
-      "to": "G",
+      "source": "G",
+      "dest": "G",
       "by": "0"
     },
     {
-      "from": "G",
-      "to": "F",
+      "source": "G",
+      "dest": "F",
       "by": "1"
     }
   ],
