@@ -1,0 +1,31 @@
+{
+    "alphabet": "a",
+    "start": "0",
+    "states": [
+        {
+            "is_terminal": false,
+            "name": "0"
+        },
+        {
+            "is_terminal": true,
+            "name": "1"
+        }
+    ],
+    "transmissions": [
+        {
+            "by": "a",
+            "dest": "1",
+            "source": "0"
+        },
+        {
+            "by": "a",
+            "dest": "1",
+            "source": "1"
+        },
+        {
+            "by": "a",
+            "dest": "1",
+            "source": "1"
+        }
+    ]
+}

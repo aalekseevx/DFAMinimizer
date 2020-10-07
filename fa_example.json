@@ -1,0 +1,122 @@
+{
+  "states": [
+      {
+        "name": "A",
+        "is_terminal": false
+      },
+    {
+      "name": "B",
+      "is_terminal": false
+    },
+    {
+      "name": "C",
+      "is_terminal": false
+    },
+    {
+      "name": "D",
+      "is_terminal": false
+    },
+    {
+      "name": "E",
+      "is_terminal": false
+    },
+    {
+      "name": "F",
+      "is_terminal": true
+    },
+    {
+      "name": "G",
+      "is_terminal": true
+    },
+    {
+      "name": "H",
+      "is_terminal": false
+    }
+  ],
+
+  "transmissions": [
+    {
+      "source": "A",
+      "dest": "B",
+      "by": "1"
+    },
+    {
+      "source": "B",
+      "dest": "A",
+      "by": "1"
+    },
+    {
+      "source": "A",
+      "dest": "H",
+      "by": "0"
+    },
+    {
+      "source": "B",
+      "dest": "H",
+      "by": "0"
+    },
+    {
+      "source": "H",
+      "dest": "C",
+      "by": "0"
+    },
+    {
+      "source": "H",
+      "dest": "C",
+      "by": "1"
+    },
+    {
+      "source": "C",
+      "dest": "E",
+      "by": "0"
+    },
+    {
+      "source": "C",
+      "dest": "F",
+      "by": "1"
+    },
+    {
+      "source": "F",
+      "dest": "F",
+      "by": "0"
+    },
+    {
+      "source": "F",
+      "dest": "F",
+      "by": "1"
+    },
+    {
+      "source": "E",
+      "dest": "F",
+      "by": "0"
+    },
+    {
+      "source": "E",
+      "dest": "G",
+      "by": "1"
+    },
+    {
+      "source": "D",
+      "dest": "E",
+      "by": "0"
+    },
+    {
+      "source": "D",
+      "dest": "F",
+      "by": "1"
+    },
+    {
+      "source": "G",
+      "dest": "G",
+      "by": "0"
+    },
+    {
+      "source": "G",
+      "dest": "F",
+      "by": "1"
+    }
+  ],
+
+  "start": "A",
+  "alphabet": "01"
+}
