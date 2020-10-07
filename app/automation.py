@@ -130,9 +130,9 @@ def minimize(dfa: Automation) -> Automation:
 
     new_dfa.transmissions = []
     for edge in dfa.transmissions:
-        c1 = component[edge.source]
-        c2 = component[edge.dest]
-        if c1 != COMPONENT_NOT_SET and c2 != COMPONENT_NOT_SET:
+        source_component = component[edge.source]
+        dest_component = component[edge.dest]
+        if source_component != COMPONENT_NOT_SET and dest_component != COMPONENT_NOT_SET:
             new_dfa.transmissions.append(Transmission(
                 source=str(component[edge.source]),
                 dest=str(component[edge.dest]),
