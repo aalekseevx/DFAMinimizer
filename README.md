@@ -2,7 +2,8 @@
 
 [![codecov](https://codecov.io/gh/aalekseevx/DFAMinimizer/branch/master/graph/badge.svg)](https://codecov.io/gh/aalekseevx/DFAMinimizer)
 
-TODO: Add brief description.
+Script, which makes finite automation deterministic and
+minimizes it if possible.
 
 ## Requirements
 
