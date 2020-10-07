@@ -17,7 +17,7 @@ poetry install
 
 ## Run program
 
-`dfa.json` is an input file, formatted as `dfa_example.json`.
+`fa.json` is an input file, formatted as `fa_example.json`.
 ```bash
 poetry run task main dfa.json small_dfa.json
 ```
