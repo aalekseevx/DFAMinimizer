@@ -1,0 +1,82 @@
+{
+    "alphabet": "abc",
+    "start": "0",
+    "states": [
+        {
+            "is_terminal": false,
+            "name": "0"
+        }
+    ],
+    "transmissions": [
+        {
+            "by": "a",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "a",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "a",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "a",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "a",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "b",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "c",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "b",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "c",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "b",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "c",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "a",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "b",
+            "dest": "0",
+            "source": "0"
+        },
+        {
+            "by": "c",
+            "dest": "0",
+            "source": "0"
+        }
+    ]
+}

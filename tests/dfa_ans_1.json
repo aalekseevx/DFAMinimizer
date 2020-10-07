@@ -1,0 +1,64 @@
+{
+    "alphabet": "ab",
+    "start": "A",
+    "states": [
+        {
+            "is_terminal": false,
+            "name": "A"
+        },
+        {
+            "is_terminal": false,
+            "name": "A#B"
+        },
+        {
+            "is_terminal": false,
+            "name": "null"
+        },
+        {
+            "is_terminal": true,
+            "name": "A#B#C"
+        }
+    ],
+    "transmissions": [
+        {
+            "by": "a",
+            "dest": "A#B",
+            "source": "A"
+        },
+        {
+            "by": "b",
+            "dest": "null",
+            "source": "A"
+        },
+        {
+            "by": "a",
+            "dest": "A#B#C",
+            "source": "A#B"
+        },
+        {
+            "by": "b",
+            "dest": "null",
+            "source": "A#B"
+        },
+        {
+            "by": "a",
+            "dest": "null",
+            "source": "null"
+        },
+        {
+            "by": "b",
+            "dest": "null",
+            "source": "null"
+        },
+        {
+            "by": "a",
+            "dest": "A#B#C",
+            "source": "A#B#C"
+        },
+        {
+            "by": "b",
+            "dest": "null",
+            "source": "A#B#C"
+        }
+    ]
+}

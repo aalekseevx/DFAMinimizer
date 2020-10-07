@@ -1,0 +1,47 @@
+{
+  "states": [
+      {
+        "name": "A",
+        "is_terminal": false
+      },
+    {
+      "name": "B",
+      "is_terminal": false
+    },
+    {
+      "name": "C",
+      "is_terminal": false
+    }
+  ],
+
+  "transmissions": [
+    {
+      "source": "A",
+      "dest": "B",
+      "by": "a"
+    },
+    {
+      "source": "A",
+      "dest": "A",
+      "by": "a"
+    },
+    {
+      "source": "B",
+      "dest": "C",
+      "by": "a"
+    },
+    {
+      "source": "B",
+      "dest": "B",
+      "by": "a"
+    },
+    {
+      "source": "C",
+      "dest": "C",
+      "by": "a"
+    }
+  ],
+
+  "start": "A",
+  "alphabet": "abc"
+}
